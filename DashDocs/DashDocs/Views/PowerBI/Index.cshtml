@@ -1,0 +1,24 @@
+﻿@model DashDocs.ViewModels.ReportViewModel
+
+@{
+    ViewBag.Title = "Report";
+}
+
+<script src="~/Scripts/jquery-3.1.1.min.js"></script>
+<script src="~/Scripts/powerbi.min.js"></script>
+
+<div class="col-md-12 bg-blue">
+    <h2>@Model.Report.Name</h2>
+</div>
+
+<div class="col-md-12 page-content">
+    @Html.PowerBIReportFor(m => m.Report, new { id = "pbi-report", style = "height:65vh", powerbi_access_token = Model.AccessToken })
+</div>
+
+<script>
+    $(function () {
+        var reportElement = document.getElementById('pbi-report');
+       
+        var report = powerbi.embed(reportElement);
+    });
+</script>

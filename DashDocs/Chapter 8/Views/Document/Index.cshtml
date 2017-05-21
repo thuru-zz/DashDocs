@@ -1,0 +1,34 @@
+﻿@model KeyValuePair<DashDocs.Models.Document, List<DashDocs.Models.Comment>>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="col-md-12 bg-blue">
+    <h2>@Model.Key.DocumentName</h2>
+</div>
+
+<div class="col-md-12 page-content">
+    @using (Html.BeginForm("Comment", "Document", FormMethod.Post))
+    {
+        <div class="form-inline padding-top-25">
+            <div class="form-group">
+                <label >Comment</label><br />
+                <textarea type="text" class="form-control" name="content" cols="40"></textarea>
+                <input type="hidden" value="@Model.Key.Id" name="documentId" />
+                <button type="submit" value="Post" class="btn btn-primary">Post</button>
+            </div>
+        </div>
+    }
+
+    <div id="comments" class="padding-top-25">
+        @foreach (var item in Model.Value)
+        {
+            <div id="comment">
+                <span id="content">@item.Content</span>
+                <span class="badge"><span id="author">by @item.Author</span></span>
+                <hr/>
+            </div>
+        }
+    </div>
+</div>

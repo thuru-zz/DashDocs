@@ -1,0 +1,68 @@
+﻿@model IEnumerable<DashDocs.Models.DocumentIndex>
+
+<div class="col-md-12 bg-blue">
+    @{
+        ViewBag.Title = "Documents Search";
+    }
+</div>
+
+<div class="col-md-12 page-content">
+    <div class="col-md-12 no-padding">
+        @using (Html.BeginForm("Index", "Search", FormMethod.Get))
+        {
+            <div class="form-group padding-top-25">
+                <label class="control-label ">Search : </label>
+                <div class="col-md-12 no-padding">
+                    <input type="text" name="search" id="search" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10 padding-tb-15">
+                    <input type="submit" value="Search" class="btn btn-primary" />
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="col-md-12 div-table">
+        <h2>Results</h2>
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    Document Name
+                </th>
+                <th>
+                    Owner
+                </th>
+                <th>
+                    Created On
+                </th>
+                <th></th>
+            </tr>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DocumentName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedOn)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Index", "Document", new { documentId = item.DocumentId }, new { }) |
+                            @Html.ActionLink("Download", "Download", "Home", new { documentId = item.DocumentId })
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
