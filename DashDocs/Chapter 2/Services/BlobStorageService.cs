@@ -42,6 +42,8 @@ namespace DashDocs.Services
             var stream = new MemoryStream();
             await block.DownloadToStreamAsync(stream);
 
+            stream.Position = 0;
+
             var content = new Tuple<MemoryStream, string>(stream, document.DocumentName);
 
             return content;

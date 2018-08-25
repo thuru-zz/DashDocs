@@ -43,6 +43,8 @@ namespace DashDocs.Services
             var stream = new MemoryStream();
             await block.DownloadToStreamAsync(stream);
 
+            stream.Position = 0;
+
             var content = new KeyValuePair<string, MemoryStream>(document.DocumentName, stream);
 
             return content;
